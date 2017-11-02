@@ -1,0 +1,31 @@
+{
+    "name": "endeavors/support-vo",
+    "description": "A flexible approach to handle phps data types",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adam Rodriguez",
+            "email": "adam_rodriguez@bitbucket.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Endeavors\\Support\\VO\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Endeavors\\Support\\VO\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "3.2.*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
