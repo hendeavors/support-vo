@@ -4,7 +4,7 @@ namespace Endeavors\Support\VO;
 
 /**
  * We use the name ModernArray for the obvious reason array is taken
- * @todo filter,intersect,merge
+ * @todo filter,intersect,merge,explode
  */
 class ModernArray
 {
