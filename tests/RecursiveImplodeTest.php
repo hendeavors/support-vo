@@ -25,7 +25,7 @@ class RecursiveImplodeTest extends \Orchestra\Testbench\TestCase
 
         $modernArray = ModernArray::create($someNestedArray);
 
-        $this->assertEquals('otp, firstName, lastName, ssn4, dob', $modernArray->implode());
+        $this->assertEquals('otp, personMeta:{firstName, lastName, ssn4, dob}', $modernArray->implode());
     }
 
     public function testImplodeOfObject()
@@ -42,7 +42,7 @@ class RecursiveImplodeTest extends \Orchestra\Testbench\TestCase
 
         $modernArray = ModernArray::create($someNestedObject);
 
-        $this->assertEquals('otp, firstName, lastName, ssn4, dob', $modernArray->implode());
+        $this->assertEquals('otp, personMeta:{firstName, lastName, ssn4, dob}', $modernArray->implode());
     }
 
     public function testModernArrayCanBeEchoed()

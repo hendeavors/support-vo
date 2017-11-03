@@ -36,9 +36,9 @@ class ModernArray
     {
         $result = '';
         
-        foreach($this->modernArray as $next) {
+        foreach($this->modernArray as $key => $next) {
             if( is_array($next) ) {
-                $result .= static::create($next)->implode($glue);
+                $result .= $key . ':{' . static::create($next)->implode($glue) . '}';
             } else {
                 $result .= $next . $glue;
             }
