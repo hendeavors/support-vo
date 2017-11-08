@@ -50,6 +50,15 @@ class ModernArray
     }
     
     /**
+     * @param mixed needle
+     * @todo determine exact validation requirements on needle
+     */
+    public function inArray($needle)
+    {
+        return in_array($needle, $this->get());
+    }
+    
+    /**
      * @todo test
      */
     public function combine($input)
