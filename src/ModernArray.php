@@ -51,11 +51,18 @@ class ModernArray
     
     /**
      * @param mixed needle
-     * @todo determine exact validation requirements on needle
      */
     public function inArray($needle)
     {
         return in_array($needle, $this->get());
+    }
+    
+    /**
+     * Check for a key
+     */
+    public function hasKey($key)
+    {
+        return array_key_exists($key, $this->get());
     }
     
     /**
