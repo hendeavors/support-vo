@@ -59,12 +59,12 @@ class ModernString
 
     public function toUpper()
     {
-        return strtoupper($this->get());
+        return static::create(strtoupper($this->get()));
     }
 
     public function toLower()
     {
-        return strtolower($this->get());
+        return static::create(strtolower($this->get()));
     }
 
     public function length()
