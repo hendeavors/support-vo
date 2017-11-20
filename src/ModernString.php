@@ -36,7 +36,7 @@ class ModernString
     {
         $result = 0;
         
-        if( $this->hasLength() && mb_strlen($character) > 0 ) {
+        if( $this->isNotEmpty() && mb_strlen($character) > 0 ) {
             for($i = 0; $i < $this->length(); $i++ ) {
                 if( 0 === $result && mb_strlen($character) > 0) {
                     $result = mb_strpos($this->get(), $character);
@@ -55,6 +55,16 @@ class ModernString
     public function isNotEmpty()
     {
         return $this->length() > 0;
+    }
+
+    public function toUpper()
+    {
+        return strtoupper($this->get());
+    }
+
+    public function toLower()
+    {
+        return strtolower($this->get());
     }
 
     public function length()
