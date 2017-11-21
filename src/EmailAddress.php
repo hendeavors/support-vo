@@ -20,11 +20,6 @@ class EmailAddress
         }
     }
 
-    protected static function create($value, $loose = true)
-    {
-        return new static($value, $loose);
-    }
-
     public static function strict($value)
     {
         return new static($value, false);
