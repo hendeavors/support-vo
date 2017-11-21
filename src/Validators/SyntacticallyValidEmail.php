@@ -47,7 +47,7 @@ class SyntacticallyValidEmail
     public function validate($value)
     {
         if( false === $this->validatationResult($value) ) {
-            throw new Exceptions\InvalidEmail("Value is not a valid email address");
+            throw new Exceptions\InvalidEmail(sprintf("Value %s is not a valid email address", $value));
         }
 
         return true;

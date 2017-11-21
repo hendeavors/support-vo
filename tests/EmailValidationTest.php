@@ -145,6 +145,7 @@ class EmailValidationTest extends \Orchestra\Testbench\TestCase
             try {
                 EmailAddress::loose($invalidEmail);
             } catch(\RuntimeException $ex) {
+                $this->assertEquals($ex->getMessage(), sprintf("Value %s is not a valid email address", $invalidEmail) );
                 $i++;
             }
             
