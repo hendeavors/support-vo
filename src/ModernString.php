@@ -10,7 +10,10 @@ class ModernString
 
     private function __construct($string)
     {
-        if( ! is_string($string) ) {
+        if($string instanceof ModernString) {
+            $string = $string->get();
+        }
+        elseif( ! is_string($string) ) {
             throw new InvalidString("The argument cannot be of type " . gettype($string));
         }
 
@@ -29,22 +32,31 @@ class ModernString
 
     public function contains($character)
     {
-        return $this->position($character) > 0;
+        return false !== $this->position($character);
     }
 
     public function position($character)
     {
-        $result = 0;
+        $result = false;
         
         if( $this->isNotEmpty() && mb_strlen($character) > 0 ) {
             for($i = 0; $i < $this->length(); $i++ ) {
-                if( 0 === $result && mb_strlen($character) > 0) {
+                if( false === $result && mb_strlen($character) > 0) {
                     $result = mb_strpos($this->get(), $character);
                 }
             }
         }
         
         return $result;
+    }
+
+    public function substring($start, $length = null)
+    {
+        if( null === $length ) {
+            $length = (int)mb_strlen($this->get());
+        }
+
+        return static::create(mb_substr($this->get(), (int)$start, (int)$length));
     }
 
     public function isEmpty()
@@ -69,7 +81,7 @@ class ModernString
 
     public function length()
     {
-        return strlen($this->get());
+        return mb_strlen($this->get());
     }
 
     public function get()
@@ -80,5 +92,14 @@ class ModernString
     public function __toString()
     {
         return $this->get();
+    }
+
+    public function __get($arg)
+    {
+        $that = $this;
+
+        if( method_exists($that, $arg) ) {
+            return $that->$arg();
+        }
     }
 }
