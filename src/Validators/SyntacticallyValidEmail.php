@@ -168,7 +168,7 @@ class SyntacticallyValidEmail
 
         $text = ModernString::create($text);
 
-		if ( ! $this->skipSubDomain ($text->get(), $index, $type))
+		if ( ! $this->skipSubDomain ($text, $index, $type))
 			return false;
 
 		if ($index < $text->length() && $text->get()[$index] == '.') {
@@ -178,7 +178,7 @@ class SyntacticallyValidEmail
 				if ($index == $text->length())
 					return false;
 
-				if ( ! $this->skipSubDomain ($text->get(), $index, $type))
+				if ( ! $this->skipSubDomain ($text, $index, $type))
                     return false;
                     
 			} while ($index < $text->length() && $text->get()[$index] == '.');
@@ -330,7 +330,7 @@ class SyntacticallyValidEmail
         // Quoted-string = DQUOTE *qcontent DQUOTE
 
         if ($email->get()[$index] == '"') {
-            if ( ! $this->skipQuoted ($email->get(), $index) || $index >= $email->length())
+            if ( ! $this->skipQuoted ($email, $index) || $index >= $email->length())
                 return false;
         } else {
                 
@@ -357,7 +357,7 @@ class SyntacticallyValidEmail
         
         if ($email->get()[$index] != '[') {
             // domain
-            if (!$this->skipDomain ($email->get(), $index, $allowTopLevelDomains))
+            if (!$this->skipDomain ($email, $index, $allowTopLevelDomains))
                 return false;
 
             return $index == $email->length;
@@ -370,8 +370,8 @@ class SyntacticallyValidEmail
             return false;
 
         $ipv6 = $email->substring ($index, 5);
-        if ($ipv6->toLower()->get() == "ipv6:") {
-            $index += mb_strlen("IPv6:");
+        if ($ipv6->toLower() == "ipv6:") {
+            $index += $ipv6->length();
             if (!$this->skipIPv6Literal ($email, $index))
                 return false;
         } else {

@@ -4,10 +4,22 @@ namespace Endeavors\Support\VO;
 
 use Endeavors\Support\VO\Exceptions\InvalidString;
 
+/**
+ * Represents a string
+ */
 class ModernString
 {
+    /**
+     * The string to be used as a value object
+     * 
+     * @var string
+     */
     protected $modernString;
-
+    
+    /**
+     * @param string
+     * @throws Endeavors\Support\VO\Exceptions\InvalidString
+     */
     private function __construct($string)
     {
         if($string instanceof ModernString) {
@@ -19,12 +31,23 @@ class ModernString
 
         $this->modernString = $string;
     }
-
+    
+    /**
+     * Factory creation
+     * 
+     * @return this
+     */
     public static function create($string)
     {
         return new static($string);
     }
-
+    
+    /**
+     * explode the string
+     * 
+     * @param string $glue
+     * @return array
+     */
     public function explode($glue = ', ')
     {
         return explode($glue, $this->get());

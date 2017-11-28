@@ -1,6 +1,7 @@
 {
     "name": "endeavors/support-vo",
-    "description": "A flexible approach to handle phps data types",
+    "description": "A flexible approach to handle php data types as value objects",
+    "keywords": ["php", "value objects", "php value objects", "email", "email validation", "validation"],
     "type": "library",
     "license": "MIT",
     "authors": [
