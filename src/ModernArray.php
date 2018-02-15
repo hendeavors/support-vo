@@ -18,7 +18,7 @@ class ModernArray
     {
         $this->modernArray = $array;
     }
-    
+
     /**
      * Factory acces to create the object
      */
@@ -26,7 +26,7 @@ class ModernArray
     {
         return new static((array)$input);
     }
-    
+
     /**
      * Implode recursively if we need to
      * The nested relationship is lost in the conversion
@@ -35,7 +35,7 @@ class ModernArray
     public function implode($glue = ', ')
     {
         $result = '';
-        
+
         foreach($this->modernArray as $key => $next) {
             if( is_array($next) ) {
                 $result .= $key . ':{' . static::create($next)->implode($glue) . '}';
@@ -48,15 +48,26 @@ class ModernArray
 
         return $result;
     }
-    
+
     /**
      * @param mixed needle
+     * @deprecated
      */
     public function inArray($needle)
     {
         return in_array($needle, $this->get());
     }
-    
+
+    /**
+     * Replaces inArray - check to see if the value is in the array
+     * @param  [type]  $needle [description]
+     * @return boolean         [description]
+     */
+    public function hasValue($needle)
+    {
+        return in_array($needle, $this->get());
+    }
+
     /**
      * Check for a key
      */
@@ -64,7 +75,7 @@ class ModernArray
     {
         return array_key_exists($key, $this->get());
     }
-    
+
     /**
      * @todo test
      */

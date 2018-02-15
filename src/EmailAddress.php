@@ -5,50 +5,45 @@ namespace Endeavors\Support\VO;
 /**
  * Represent a valid email address
  */
-class EmailAddress
+class EmailAddress extends Scalar\String
 {
     /**
-     * The email string to be created as a value object
-     * 
-     * @var string
+     * Determine if we should use strict validation
+     *
+     * @var bool
      */
-    protected $email;
-    
+    protected $loose;
+
     /**
      * Create the email
      * We default to a syntactically valid email
-     * 
+     *
      * @param string email
      * @param bool loose
      */
-    private function __construct($email, $loose = true)
+    protected function __construct($email, $loose = true)
     {
-        $validator = new Validators\Email;
+        $this->loose = $loose;
 
-        if( true === $loose ) {
-            $validator = new Validators\SyntacticallyValidEmail;
-        }
-        
-        // exception will be thrown if invalid
-        if( $validator->validate($email) ) {
-            $this->email = $email;
-        }
+        $this->validate($email);
+        // if an exception is not thrown we have a valid email
+        $this->value = $email;
     }
-    
+
     /**
      * Create a strict email uses
      * Standard php email validation
-     * 
+     *
      * @param $value
      */
     public static function strict($value)
     {
         return new static($value, false);
     }
-    
+
     /**
      * Create unusual syntactically valid emails
-     * 
+     *
      * @param $value
      * @return this
      */
@@ -57,13 +52,14 @@ class EmailAddress
         return new static($value, true);
     }
 
-    public function get()
+    protected function validate($value)
     {
-        return $this->email;
-    }
+        $validator = new Validators\Email;
 
-    public function __toString()
-    {
-        return $this->get();
+        if( true === $this->loose ) {
+            $validator = new Validators\SyntacticallyValidEmail;
+        }
+        // exception will be thrown if invalid
+        $validator->validate($value);
     }
 }

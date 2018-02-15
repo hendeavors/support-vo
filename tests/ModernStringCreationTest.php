@@ -10,7 +10,7 @@ class ModernStringCreationTest extends \Orchestra\Testbench\TestCase
     {
         parent::setUp();
     }
-    
+
     /**
      * @expectedException Endeavors\Support\VO\Exceptions\InvalidString
      */
@@ -23,7 +23,7 @@ class ModernStringCreationTest extends \Orchestra\Testbench\TestCase
     {
         $modernString = ModernString::create("some valid string");
     }
-    
+
     /**
      * @expectedException Endeavors\Support\VO\Exceptions\InvalidString
      */

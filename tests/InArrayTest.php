@@ -22,5 +22,9 @@ class InArrayTest extends \Orchestra\Testbench\TestCase
         $this->assertTrue($modernArray->inArray("one"));
 
         $this->assertFalse($modernArray->inArray("four"));
+
+        $this->assertTrue($modernArray->hasValue("one"));
+
+        $this->assertFalse($modernArray->hasValue("four"));
     }
 }

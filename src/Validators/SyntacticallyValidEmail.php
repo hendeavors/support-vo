@@ -49,8 +49,6 @@ class SyntacticallyValidEmail
         if( false === $this->validatationResult($value) ) {
             throw new Exceptions\InvalidEmail(sprintf("Value %s is not a valid email address", $value));
         }
-
-        return true;
     }
 
     protected function setType($type)
@@ -180,7 +178,7 @@ class SyntacticallyValidEmail
 
 				if ( ! $this->skipSubDomain ($text, $index, $type))
                     return false;
-                    
+
 			} while ($index < $text->length() && $text->get()[$index] == '.');
 		} else if ( ! $allowTopLevelDomains ) {
 			return false;
@@ -217,7 +215,7 @@ class SyntacticallyValidEmail
 
 			$index++;
         }
-        
+
 		if ($index >= $text->length() || $text->get()[$index] != '"')
 			return false;
 
@@ -318,10 +316,10 @@ class SyntacticallyValidEmail
 
         if($email->isEmpty())
             return false;
-                    
+
         if ($email->length() >= 255)
             return false;
-        
+
         // Local-part = Dot-string / Quoted-string
         //       ; MAY be case-sensitive
         //
@@ -333,28 +331,28 @@ class SyntacticallyValidEmail
             if ( ! $this->skipQuoted ($email, $index) || $index >= $email->length())
                 return false;
         } else {
-                
+
             if ( ! $this->skipAtom ($email, $index) || $index >= $email->length() ) {
                 return false;
             }
-        
+
             while ($email->get()[$index] == '.') {
                 $index++;
-        
+
                 if ($index >= $email->length())
                     return false;
-        
+
                 if (!$this->skipAtom ($email, $index))
                     return false;
-        
+
                 if ($index >= $email->length())
                     return false;
             }
         }
-        
+
         if ($index + 1 >= $email->length() || $index > 64 || $email->get()[$index++] != '@')
-            return false;  
-        
+            return false;
+
         if ($email->get()[$index] != '[') {
             // domain
             if (!$this->skipDomain ($email, $index, $allowTopLevelDomains))
@@ -362,7 +360,7 @@ class SyntacticallyValidEmail
 
             return $index == $email->length;
         }
-        
+
         // address literal
         $index++;
         // we need at least 8 more characters
@@ -382,6 +380,6 @@ class SyntacticallyValidEmail
         if ($index >= $email->length || $email->get()[$index++] != ']')
             return false;
 
-        return $index == $email->length;     
+        return $index == $email->length;
     }
 }

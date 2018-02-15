@@ -2,49 +2,31 @@
 
 namespace Endeavors\Support\VO;
 
-use Endeavors\Support\VO\Exceptions\InvalidString;
+
+use Endeavors\Support\VO\Validators\ValueValidator;
 
 /**
  * Represents a string
+ * Perform operations on a string value object
  */
-class ModernString
+class ModernString extends Scalar\String
 {
-    /**
-     * The string to be used as a value object
-     * 
-     * @var string
-     */
-    protected $modernString;
-    
     /**
      * @param string
      * @throws Endeavors\Support\VO\Exceptions\InvalidString
      */
-    private function __construct($string)
+    final protected function __construct($value)
     {
-        if($string instanceof ModernString) {
-            $string = $string->get();
-        }
-        elseif( ! is_string($string) ) {
-            throw new InvalidString("The argument cannot be of type " . gettype($string));
+        if($value instanceof ModernString) {
+            $value = $value->get();
         }
 
-        $this->modernString = $string;
-    }
-    
-    /**
-     * Factory creation
-     * 
-     * @return this
-     */
-    public static function create($string)
-    {
-        return new static($string);
+        parent::__construct($value);
     }
     
     /**
      * explode the string
-     * 
+     *
      * @param string $glue
      * @return array
      */
@@ -61,7 +43,7 @@ class ModernString
     public function position($character)
     {
         $result = false;
-        
+
         if( $this->isNotEmpty() && mb_strlen($character) > 0 ) {
             for($i = 0; $i < $this->length(); $i++ ) {
                 if( false === $result && mb_strlen($character) > 0) {
@@ -69,7 +51,7 @@ class ModernString
                 }
             }
         }
-        
+
         return $result;
     }
 
@@ -107,16 +89,6 @@ class ModernString
         return mb_strlen($this->get());
     }
 
-    public function get()
-    {
-        return $this->modernString;
-    }
-
-    public function __toString()
-    {
-        return $this->get();
-    }
-
     public function __get($arg)
     {
         $that = $this;
@@ -125,4 +97,6 @@ class ModernString
             return $that->$arg();
         }
     }
+
+
 }

@@ -11,7 +11,5 @@ class Email
         if( false === filter_var($value, FILTER_VALIDATE_EMAIL) ) {
             throw new Exceptions\InvalidEmail("Value is not a valid email address");
         }
-
-        return true;
     }
 }
