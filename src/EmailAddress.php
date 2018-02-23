@@ -5,7 +5,7 @@ namespace Endeavors\Support\VO;
 /**
  * Represent a valid email address
  */
-class EmailAddress extends Scalar\String
+class EmailAddress extends Scalar\BaseString
 {
     /**
      * Determine if we should use strict validation

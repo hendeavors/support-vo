@@ -4,7 +4,7 @@ namespace Endeavors\Support\VO\Geography\US;
 
 use Endeavors\Support\VO\Scalar;
 
-class StateCode extends Scalar\String
+class StateCode extends Scalar\BaseString
 {
     use StateList;
 

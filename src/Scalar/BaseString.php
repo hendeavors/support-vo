@@ -5,7 +5,7 @@ namespace Endeavors\Support\VO\Scalar;
 use Endeavors\Support\VO\Exceptions\InvalidString;
 use Endeavors\Support\VO\Validators\ValueValidator;
 
-abstract class String extends ValueValidator
+abstract class BaseString extends ValueValidator
 {
     protected function validate($value)
     {

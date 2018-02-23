@@ -9,7 +9,7 @@ use Endeavors\Support\VO\Validators\ValueValidator;
  * Represents a string
  * Perform operations on a string value object
  */
-class ModernString extends Scalar\String
+class ModernString extends Scalar\BaseString
 {
     /**
      * @param string
@@ -23,7 +23,7 @@ class ModernString extends Scalar\String
 
         parent::__construct($value);
     }
-    
+
     /**
      * explode the string
      *
