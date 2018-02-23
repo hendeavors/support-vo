@@ -22,7 +22,8 @@
         }
     },
     "require-dev": {
-        "orchestra/testbench": "3.2.*"
+        "orchestra/testbench": "3.2.*",
+        "phpunit/phpunit": "~4.8|~5.0"
     },
     "extra": {
         "branch-alias": {
