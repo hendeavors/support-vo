@@ -21,7 +21,9 @@ class ModernString extends Scalar\BaseString
             $value = $value->get();
         }
 
-        parent::__construct($value);
+        $this->validate($value);
+
+        $this->value = $value;
     }
 
     /**
