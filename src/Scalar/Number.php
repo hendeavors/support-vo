@@ -2,19 +2,19 @@
 
 namespace Endeavors\Support\VO\Scalar;
 
-use Endeavors\Support\VO\Exceptions\InvalidString;
+use Endeavors\Support\VO\Exceptions\InvalidNumber;
 use Endeavors\Support\VO\Validators\ValueValidator;
 
 /**
  * Represent a string
  *
  */
-abstract class BaseString extends ValueValidator
+abstract class Number extends ValueValidator
 {
     protected function validate($value)
     {
-        if( ! is_string($value) ) {
-            throw new InvalidString("The argument cannot be of type " . gettype($value));
+        if( ! is_numeric($value) ) {
+            throw new InvalidNumber("The argument cannot be of type " . gettype($value));
         }
     }
 
