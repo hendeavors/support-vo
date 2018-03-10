@@ -76,11 +76,6 @@ class ModernString extends Scalar\BaseString
         return $this->length() > 0;
     }
 
-    public function toUpper()
-    {
-        return static::create(strtoupper($this->get()));
-    }
-
     public function toLower()
     {
         return static::create(strtolower($this->get()));
@@ -99,6 +94,4 @@ class ModernString extends Scalar\BaseString
             return $that->$arg();
         }
     }
-
-
 }

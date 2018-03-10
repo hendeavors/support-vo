@@ -18,6 +18,11 @@ abstract class BaseString extends ValueValidator
         }
     }
 
+    public function toUpper()
+    {
+        return static::create(strtoupper($this->get()));
+    }
+
     public function __toString()
     {
         return $this->get();

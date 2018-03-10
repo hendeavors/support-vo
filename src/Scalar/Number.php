@@ -6,7 +6,7 @@ use Endeavors\Support\VO\Exceptions\InvalidNumber;
 use Endeavors\Support\VO\Validators\ValueValidator;
 
 /**
- * Represent a string
+ * Represent a number
  *
  */
 abstract class Number extends ValueValidator
@@ -20,6 +20,6 @@ abstract class Number extends ValueValidator
 
     public function __toString()
     {
-        return $this->get();
+        return strval($this->get());
     }
 }
