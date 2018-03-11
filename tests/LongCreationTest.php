@@ -60,8 +60,14 @@ class LongCreationTest extends \Orchestra\Testbench\TestCase
         // a normal integer
         Long::native(123);
         // the lower limit
-        Long::native('-9223372036854775808');
+        $min = Long::native('-9223372036854775808');
+
+        $this->assertEquals($min, '-9223372036854775808');
+        $this->assertTrue(is_int($min->get()));
         // the upper limit
-        Long::native('9223372036854775807');
+        $max = Long::native('9223372036854775807');
+
+        $this->assertEquals($max, '9223372036854775807');
+        $this->assertTrue(is_int($max->get()));
     }
 }

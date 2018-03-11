@@ -4,23 +4,34 @@ namespace Endeavors\Support\VO\Scalar\Integer;
 
 use Endeavors\Support\VO\Scalar;
 use Endeavors\Support\VO\Exceptions\InvalidLong;
+use Endeavors\Support\VO\Exceptions\InvalidNumber;
 
+/**
+ * a long is defined being between -9223372036854775808 and 9223372036854775807 inclusive
+ *
+ */
 class Long extends Scalar\Number
 {
     const MIN = '-9223372036854775808';
 
     const MAX = '9223372036854775807';
 
-    const TRUE_MIN = '\'' . -PHP_INT_MAX . '\'';
+    protected $useNativeValue = false;
 
     public static function native($value)
     {
-        return new static($value);
+        return new static($value, true);
     }
 
-    final protected function __construct($value)
+    final protected function __construct($value, $useNativeValue = false)
     {
+        $this->useNativeValue = $useNativeValue;
+
         $this->validate($value);
+
+        if(true === $this->useNativeValue) {
+            $value = (int)$value;
+        }
 
         $this->value = $value;
     }
@@ -28,8 +39,6 @@ class Long extends Scalar\Number
     protected function validate($value)
     {
         parent::validate($value);
-
-        dump((int)self::TRUE_MIN);
 
         $value = $this->convertValue($value);
 
