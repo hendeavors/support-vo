@@ -30,7 +30,25 @@ class LongCreationTest extends \Orchestra\Testbench\TestCase
     /**
      * @expectedException Endeavors\Support\VO\Exceptions\InvalidLong
      */
-    public function testCreatingNativeLongIntegerHigherThanMaximum()
+    public function testCreatingNumericalNativeLongIntegerHigherThanMaximum()
+    {
+        // more than the upper limit, native
+        Long::native(9223372036854775808);
+    }
+
+    /**
+     * @expectedException Endeavors\Support\VO\Exceptions\InvalidLong
+     */
+    public function testCreatingNumericalNativeLongIntegerLowerThanMinimum()
+    {
+        // less than the lower limit, native
+        Long::native(-9223372036854775809);
+    }
+
+    /**
+     * @expectedException Endeavors\Support\VO\Exceptions\InvalidLong
+     */
+    public function testCreatingStringNativeLongIntegerHigherThanMaximum()
     {
         // more than the upper limit
         Long::native('9223372036854775808');
@@ -47,12 +65,12 @@ class LongCreationTest extends \Orchestra\Testbench\TestCase
 
     public function testCreatingValidLongIntegerNatively()
     {
-        $longInteger = Long::native(123);
+        Long::native(123);
     }
 
     public function testCreatingValidLongIntegerAsNumericalString()
     {
-        $longInteger = Long::create('123');
+        Long::create('123');
     }
 
     public function testCreatingProperLongIntegerValuesNatively()
@@ -63,11 +81,9 @@ class LongCreationTest extends \Orchestra\Testbench\TestCase
         $min = Long::native('-9223372036854775808');
 
         $this->assertEquals($min, '-9223372036854775808');
-        $this->assertTrue(is_int($min->get()));
         // the upper limit
         $max = Long::native('9223372036854775807');
 
         $this->assertEquals($max, '9223372036854775807');
-        $this->assertTrue(is_int($max->get()));
     }
 }

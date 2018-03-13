@@ -5,16 +5,22 @@ namespace Endeavors\Support\VO\Scalar\Integer;
 use Endeavors\Support\VO\Scalar;
 use Endeavors\Support\VO\Exceptions\InvalidLong;
 use Endeavors\Support\VO\Exceptions\InvalidNumber;
+use Endeavors\Support\VO\Platform;
 
 /**
- * a long is defined being between -9223372036854775808 and 9223372036854775807 inclusive
- *
+ * A long is defined being between -9223372036854775808 and 9223372036854775807 inclusive
+ * To support a long on 32bit architectures we must compare numerical values as strings
+ * @todo consider moving constants into Architecture
  */
 class Long extends Scalar\Number
 {
     const MIN = '-9223372036854775808';
 
     const MAX = '9223372036854775807';
+
+    const NATIVE_MIN = -9223372036854775808;
+
+    const NATIVE_MAX = 9223372036854775807;
 
     protected $useNativeValue = false;
 
@@ -29,16 +35,27 @@ class Long extends Scalar\Number
 
         $this->validate($value);
 
-        if(true === $this->useNativeValue) {
+        if(true === $this->useNativeValue && Platform\Architecture::isModern()) {
             $value = (int)$value;
         }
 
         $this->value = $value;
     }
 
+    /**
+     * Validate the argument. If the value floats
+     * On a 32bit platform we'll throw an exception
+     * @param  [type] $value [description]
+     * @return [type]        [description]
+     * @todo some refactoring
+     */
     protected function validate($value)
     {
         parent::validate($value);
+
+        if(Platform\Architecture::isNotModern() && is_float($value)) {
+            $this->throwException($value);
+        }
 
         $value = $this->convertValue($value);
 
@@ -73,6 +90,35 @@ class Long extends Scalar\Number
         return ini_get('bcmath.scale');
     }
 
+    protected function lessThanMinimum($value)
+    {
+        if( Platform\Architecture::isModern() ) {
+            return $value < (int)self::NATIVE_MIN;
+        }
+
+        return $this->compareTo($value, self::MIN) < 0;
+    }
+
+    /**
+     * Determine if the value is higher
+     * Than the maximum long value. We attempt
+     * To compare natively if possible
+     * @param  [type] $value [description]
+     * @return bool        [description]
+     */
+    protected function moreThanMaximum($value)
+    {
+        if( Platform\Architecture::isModern() && is_float($value) ) {
+            // we need the cast so that the comparison
+            // does not convert the rhs
+            return $value > (int)self::NATIVE_MAX;
+        } elseif( Platform\Architecture::isModern() ) {
+            return $value > self::NATIVE_MAX;
+        }
+
+        return $this->compareTo($value, self::MAX) > 0;
+    }
+
     /**
      * Compares the current number with the given number
      *
@@ -91,16 +137,6 @@ class Long extends Scalar\Number
             $number,
             $this->getScale()
         );
-    }
-
-    protected function lessThanMinimum($value)
-    {
-        return $this->compareTo($value, self::MIN) < 0;
-    }
-
-    protected function moreThanMaximum($value)
-    {
-        return $this->compareTo($value, self::MAX) > 0;
     }
 
     private function throwException($value)
