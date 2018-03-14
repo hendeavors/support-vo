@@ -49,7 +49,7 @@ class Long extends Scalar\Number
     {
         parent::validate($value);
 
-        if(Platform\Architecture::isNotModern() && is_float($value)) {
+        if(is_float($value)) {
             $this->throwException($value);
         }
 
