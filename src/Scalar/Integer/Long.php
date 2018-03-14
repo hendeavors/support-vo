@@ -18,10 +18,6 @@ class Long extends Scalar\Number
 
     const MAX = '9223372036854775807';
 
-    const NATIVE_MIN = -9223372036854775808;
-
-    const NATIVE_MAX = 9223372036854775807;
-
     protected $useNativeValue = false;
 
     public static function native($value)
@@ -92,30 +88,16 @@ class Long extends Scalar\Number
 
     protected function lessThanMinimum($value)
     {
-        if( Platform\Architecture::isModern() ) {
-            return $value < (int)self::NATIVE_MIN;
-        }
-
         return $this->compareTo($value, self::MIN) < 0;
     }
 
     /**
      * Determine if the value is higher
-     * Than the maximum long value. We attempt
-     * To compare natively if possible
      * @param  [type] $value [description]
      * @return bool        [description]
      */
     protected function moreThanMaximum($value)
     {
-        if( Platform\Architecture::isModern() && is_float($value) ) {
-            // we need the cast so that the comparison
-            // does not convert the rhs
-            return $value > (int)self::NATIVE_MAX;
-        } elseif( Platform\Architecture::isModern() ) {
-            return $value > self::NATIVE_MAX;
-        }
-
         return $this->compareTo($value, self::MAX) > 0;
     }
 
