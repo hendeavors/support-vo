@@ -2,62 +2,67 @@
 
 namespace Endeavors\Support\VO\Currency;
 
-use Endeavors\Support\VO\Scalar\Floats;
+use Endeavors\Support\VO\Scalar;
+use Endeavors\Support\VO\Contracts;
 
 /**
  * For now we'll define dollar implementations
  */
-class Money extends Floats\Float
+class Money extends Scalar\Floats\Float
 {
     /**
-     * [protected description]
+     * Representation for the money, a currency symbol
      * @var [type]
      * @todo what are valid currency units?
      */
     protected $representation;
+
+    /**
+     * The precision
+     * @var [type]
+     */
+    protected $precision;
     /**
      * Money
      * @param [type] $value          [description]
      * @param [type] $currencySymbol [description]
      * @todo define currencySymbol
      */
-    final protected function __construct($value, $representation)
+    final protected function __construct($value, $representation, $precision)
     {
         $this->validate($value);
 
-        if( $representation instanceof CurrencyCodeAlpha ) {
-            $this->representation = Translator::fromCode($representation)->toSymbol();
-        } elseif( $representation instanceof CurrencySymbol ) {
-            $this->representation = Translator::fromSymbol($representation)->toCode();
-        }
+        $this->representation = $representation->toSymbol();
+
+        $this->precision = $precision;
 
         $this->value = $value;
     }
 
-    public static function fromDollars($value)
+    public static function fromDollars($value, $precision = 2)
     {
-        return new static($value, CurrencyCodeAlpha::USD());
+        return static::from($value, Translator::fromCode(CurrencyCodeAlpha::USD()), $precision);
     }
 
-    public static function fromPounds($value)
+    public static function fromPounds($value, $precision = 2)
     {
-        return new static($value, CurrencyCodeAlpha::GBP());
+        return static::from($value, Translator::fromCode(CurrencyCodeAlpha::GBP()), $precision);
     }
 
-    public function inPounds()
+    public static function from($value, Contracts\ITranslator $translator, $precision)
     {
-        // @todo need to define currencyUnits
+        $precision = Scalar\Integer\Integer::create($precision);
+
+        return new static($value, $translator, $precision);
     }
 
-    public function inDollars()
+    public function get()
     {
-        
+        return round($this->value, $this->precision->toNative());
     }
 
     public function __toString()
     {
-        return $this->currencySymbol . ' ' . $this->value;
+        return \strval($this->representation . ' ' . $this->get());
     }
-    // Money::create()->inDollars()
-    // Money::fromPounds()->inDollars()
 }

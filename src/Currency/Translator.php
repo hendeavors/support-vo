@@ -2,7 +2,9 @@
 
 namespace Endeavors\Support\VO\Currency;
 
-class Translator
+use Endeavors\Support\VO\Contracts;
+
+class Translator implements Contracts\ITranslator
 {
     private function __construct($translation)
     {
@@ -26,7 +28,9 @@ class Translator
         //
         if( $this->translation instanceof CurrencyCodeAlpha ) return $this->translation;
 
-        return CurrencyCodeAlpha::get($this->translation);
+        $key = key($this->translation->getValue());
+
+        return CurrencyCodeAlpha::$key()->getValue()[$key];
     }
 
     public function toSymbol()
@@ -34,6 +38,8 @@ class Translator
         //
         if( $this->translation instanceof CurrencySymbol ) return $this->translation;
 
-        return CurrencySymbol::get($this->translation);
+        $key = key($this->translation->getValue());
+
+        return CurrencySymbol::$key()->getValue()[$key];
     }
 }

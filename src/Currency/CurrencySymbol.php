@@ -6,6 +6,6 @@ use MabeEnum\Enum;
 
 final class CurrencySymbol extends Enum
 {
-    const USD = 24;
-    const GBP = 'a3';
+    const GBP = ['GBP' => "\xa3"];
+    const USD = ['USD' => "\x24"];
 }

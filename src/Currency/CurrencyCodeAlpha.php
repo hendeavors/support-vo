@@ -6,6 +6,6 @@ use MabeEnum\Enum;
 
 final class CurrencyCodeAlpha extends Enum
 {
-    const USD = 'USD';
-    const GBP = 'GBP';
+    const USD = ['USD' => 'USD'];
+    const GBP = ['GBP' => 'GBP'];
 }
