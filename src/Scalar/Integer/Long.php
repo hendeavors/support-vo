@@ -11,8 +11,8 @@ use Endeavors\Support\VO\Platform;
  * A long is defined being between -9223372036854775808 and 9223372036854775807 inclusive
  * To support a long on 32bit architectures we must compare numerical values as strings
  * @todo consider moving constants into Architecture
- * @todo convert to abstract class
  * Usage here would be to support a more complicated object which requires long integer constraints
+ * We abstract the type as it doesn't provide much practical support outside of phps long integer type
  */
 abstract class Long extends Scalar\Number
 {

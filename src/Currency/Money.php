@@ -51,7 +51,7 @@ class Money extends Scalar\Floats\SystemFloat
 
     public static function from($value, Contracts\ITranslator $translator, $precision)
     {
-        $precision = Scalar\Integer\Integer::create($precision);
+        $precision = Scalar\IntegerImplementation::create($precision);
 
         return new static($value, $translator, $precision);
     }

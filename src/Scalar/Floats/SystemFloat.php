@@ -16,7 +16,7 @@ class SystemFloat extends Scalar\Number
         try {
             // validate if the numerical value is an integer type
             // a float can be considered an integer
-            $value = Scalar\Integer\Integer::create($value)->toNative();
+            $value = Scalar\IntegerImplementation::create($value)->toNative();
 
             $valid = true;
         } catch(Exceptions\InvalidInteger $e) {

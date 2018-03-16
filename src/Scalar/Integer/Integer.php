@@ -5,7 +5,12 @@ namespace Endeavors\Support\VO\Scalar\Integer;
 use Endeavors\Support\VO\Scalar;
 use Endeavors\Support\VO\Exceptions;
 
-class Integer extends Scalar\Number
+/**
+ * [abstract description]
+ * @var [type]
+ * We abstract the type as it doesn't provide much practical support outside of phps long integer type
+ */
+abstract class Integer extends Scalar\Number
 {
     final protected function __construct($value)
     {
