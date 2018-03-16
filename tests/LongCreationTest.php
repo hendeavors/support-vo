@@ -16,7 +16,7 @@ class LongCreationTest extends \Orchestra\Testbench\TestCase
      */
     public function testCreatingInvalidLongInteger()
     {
-        $longInteger = Long::create("abcd");
+        LongImplementation::create("abcd");
     }
 
     /**
@@ -24,7 +24,7 @@ class LongCreationTest extends \Orchestra\Testbench\TestCase
      */
     public function testCreatingLongIntegerWithBadDataType()
     {
-        $longInteger = Long::create([]);
+        LongImplementation::create([]);
     }
 
     /**
@@ -33,7 +33,7 @@ class LongCreationTest extends \Orchestra\Testbench\TestCase
     public function testCreatingNumericalNativeLongIntegerHigherThanMaximum()
     {
         // more than the upper limit, native
-        Long::native(9223372036854775808);
+        LongImplementation::native(9223372036854775808);
     }
 
     /**
@@ -42,7 +42,7 @@ class LongCreationTest extends \Orchestra\Testbench\TestCase
     public function testCreatingNumericalNativeLongIntegerLowerThanMinimum()
     {
         // less than the lower limit, native
-        Long::native(-9223372036854775809);
+        LongImplementation::native(-9223372036854775809);
     }
 
     /**
@@ -51,7 +51,7 @@ class LongCreationTest extends \Orchestra\Testbench\TestCase
     public function testCreatingStringNativeLongIntegerHigherThanMaximum()
     {
         // more than the upper limit
-        Long::native('9223372036854775808');
+        LongImplementation::native('9223372036854775808');
     }
 
     /**
@@ -60,30 +60,32 @@ class LongCreationTest extends \Orchestra\Testbench\TestCase
     public function testCreatingNativeLongIntegerLowerThanMinimum()
     {
         // less than the lower limit
-        Long::native('-9223372036854775809');
+        LongImplementation::native('-9223372036854775809');
     }
 
     public function testCreatingValidLongIntegerNatively()
     {
-        Long::native(123);
+        LongImplementation::native(123);
     }
 
     public function testCreatingValidLongIntegerAsNumericalString()
     {
-        Long::create('123');
+        LongImplementation::create('123');
     }
 
     public function testCreatingProperLongIntegerValuesNatively()
     {
         // a normal integer
-        Long::native(123);
+        LongImplementation::native(123);
         // the lower limit
-        $min = Long::native('-9223372036854775808');
+        $min = LongImplementation::native('-9223372036854775808');
 
         $this->assertEquals($min, '-9223372036854775808');
         // the upper limit
-        $max = Long::native('9223372036854775807');
+        $max = LongImplementation::native('9223372036854775807');
 
         $this->assertEquals($max, '9223372036854775807');
     }
 }
+
+class LongImplementation extends Long {}

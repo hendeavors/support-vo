@@ -5,7 +5,7 @@ namespace Endeavors\Support\VO\Geography\US;
 use Endeavors\Support\VO\Scalar;
 use Endeavors\Support\VO\ModernString;
 
-class StateName extends Scalar\BaseString
+class StateName extends Scalar\SystemString
 {
     use StateList;
 

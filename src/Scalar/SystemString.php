@@ -9,7 +9,7 @@ use Endeavors\Support\VO\Validators\ValueValidator;
  * Represent a string
  *
  */
-abstract class BaseString extends ValueValidator
+abstract class SystemString extends ValueValidator
 {
     protected function validate($value)
     {

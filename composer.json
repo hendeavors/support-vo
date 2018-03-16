@@ -29,5 +29,8 @@
         "branch-alias": {
             "dev-develop": "2.0.x-dev"
         }
+    },
+    "require": {
+        "marc-mabe/php-enum": "^3.0@dev"
     }
 }
