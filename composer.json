@@ -29,5 +29,8 @@
         "branch-alias": {
             "dev-master": "2.1.x-dev"
         }
+    },
+    "require": {
+        "marc-mabe/php-enum": "^2.3"
     }
 }
