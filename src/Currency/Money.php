@@ -8,7 +8,7 @@ use Endeavors\Support\VO\Contracts;
 /**
  * For now we'll define dollar implementations
  */
-class Money extends Scalar\Floats\Float
+class Money extends Scalar\Floats\SystemFloat
 {
     /**
      * Representation for the money, a currency symbol

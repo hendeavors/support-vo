@@ -5,7 +5,7 @@ namespace Endeavors\Support\VO\Scalar\Floats;
 use Endeavors\Support\VO\Exceptions;
 use Endeavors\Support\VO\Scalar;
 
-class Float extends Scalar\Number
+class SystemFloat extends Scalar\Number
 {
     protected function validate($value)
     {
