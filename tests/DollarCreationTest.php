@@ -61,4 +61,19 @@ class DollarCreationTest extends \Orchestra\Testbench\TestCase
 
         $this->assertEquals($dollars, "\x24" . 5.6557);
     }
+
+    public function testNativeValueIsAFloat()
+    {
+        $dollars = CommonMoney::fromDollars(5.651);
+
+        $this->assertEquals(5.651, $dollars->toNative());
+
+        $this->assertInternalType('float', $dollars->toNative());
+
+        $dollars = SmallMoney::fromDollars(5.651);
+
+        $this->assertEquals(5.65, $dollars->toNative());
+
+        $this->assertInternalType('float', $dollars->toNative());
+    }
 }

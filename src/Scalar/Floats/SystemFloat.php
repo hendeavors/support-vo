@@ -31,4 +31,9 @@ class SystemFloat extends Scalar\Number
 
         $this->value = $value;
     }
+
+    public function toNative()
+    {
+        return (float)$this->get();
+    }
 }
