@@ -63,6 +63,6 @@ class Money extends Scalar\Floats\SystemFloat
 
     public function __toString()
     {
-        return \strval($this->representation . ' ' . $this->get());
+        return \strval($this->representation . $this->get());
     }
 }
