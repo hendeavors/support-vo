@@ -5,6 +5,8 @@ namespace Endeavors\Support\VO\Tests;
 use Endeavors\Support\VO\Currency\Money;
 use Endeavors\Support\VO\Currency\CommonMoney;
 use Endeavors\Support\VO\Currency\SmallMoney;
+use Endeavors\Support\VO\Currency\Translator;
+use Endeavors\Support\VO\Currency\CurrencyCodeAlpha;
 
 class DollarCreationTest extends \Orchestra\Testbench\TestCase
 {
@@ -39,6 +41,10 @@ class DollarCreationTest extends \Orchestra\Testbench\TestCase
         $this->assertEquals($dollars, "\x24" . 5.65);
 
         $dollars = SmallMoney::fromDollars(5.655);
+
+        $this->assertEquals($dollars, "\x24" . 5.66);
+
+        $dollars = SmallMoney::from(5.655, Translator::fromCode(CurrencyCodeAlpha::USD()));
 
         $this->assertEquals($dollars, "\x24" . 5.66);
     }

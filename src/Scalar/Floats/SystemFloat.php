@@ -36,4 +36,28 @@ class SystemFloat extends Scalar\Number
     {
         return (float)$this->get();
     }
+
+    /**
+     * Check object equality
+     * @param  [type] $value [description]
+     * @return [type] bool
+     */
+    public function equals($value)
+    {
+        $comparison = static::create($value);
+
+        return $this == $comparison;
+    }
+
+    /**
+     * Check identity of the actual value
+     * @param  [type] $value [description]
+     * @return [type]        [description]
+     */
+    public function identical($value)
+    {
+        $comparison = static::create($value);
+
+        return $this->toNative() === $comparison->toNative();
+    }
 }
