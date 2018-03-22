@@ -58,7 +58,7 @@ class Month extends ValueValidator
         return new static($value);
     }
 
-    public function nextMonth()
+    public function next()
     {
         $currentDate = $this->value;
 
@@ -75,11 +75,6 @@ class Month extends ValueValidator
         }
 
         return new static($currentDate->modify('+1 month'));
-    }
-
-    public function next()
-    {
-        return $this->nextMonth();
     }
 
     public function toDays()

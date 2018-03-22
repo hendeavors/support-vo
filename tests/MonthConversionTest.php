@@ -40,9 +40,9 @@ class MonthConversionTest extends \Orchestra\Testbench\TestCase
         //
         $m = Time\Month::create('2010-01-31');
 
-        $this->assertEquals($m->nextMonth(), "February");
+        $this->assertEquals($m->next(), "February");
 
-        $days = Scalar\IntegerImplementation::create($m->nextMonth()->toDays());
+        $days = Scalar\IntegerImplementation::create($m->next()->toDays());
 
         $this->assertEquals(date('28'), $days);
 
@@ -50,11 +50,11 @@ class MonthConversionTest extends \Orchestra\Testbench\TestCase
 
         $m = Time\Month::create('2010-01-05');
 
-        $this->assertEquals($m->nextMonth(), "February");
+        $this->assertEquals($m->next(), "February");
 
-        $days = Scalar\IntegerImplementation::create($m->nextMonth()->toDays());
+        $days = Scalar\IntegerImplementation::create($m->next()->toDays());
 
-        $this->assertEquals($m->nextMonth()->toDateTime(), new \DateTime("2010-02-05"));
+        $this->assertEquals($m->next()->toDateTime(), new \DateTime("2010-02-05"));
 
         $this->assertEquals(date('28'), $days);
 
@@ -62,11 +62,11 @@ class MonthConversionTest extends \Orchestra\Testbench\TestCase
 
         $m = Time\Month::create('2010-05-15');
 
-        $this->assertEquals($m->nextMonth(), "June");
+        $this->assertEquals($m->next(), "June");
 
-        $days = Scalar\IntegerImplementation::create($m->nextMonth()->toDays());
+        $days = Scalar\IntegerImplementation::create($m->next()->toDays());
 
-        $this->assertEquals($m->nextMonth()->toDateTime(), new \DateTime("2010-06-15"));
+        $this->assertEquals($m->next()->toDateTime(), new \DateTime("2010-06-15"));
 
         $this->assertEquals(date('30'), $days);
 
@@ -74,11 +74,11 @@ class MonthConversionTest extends \Orchestra\Testbench\TestCase
 
         $m = Time\Month::create('2010-05-31');
 
-        $this->assertEquals($m->nextMonth(), "June");
+        $this->assertEquals($m->next(), "June");
 
-        $days = Scalar\IntegerImplementation::create($m->nextMonth()->toDays());
+        $days = Scalar\IntegerImplementation::create($m->next()->toDays());
 
-        $this->assertEquals($m->nextMonth()->toDateTime(), new \DateTime("2010-06-30"));
+        $this->assertEquals($m->next()->toDateTime(), new \DateTime("2010-06-30"));
 
         $this->assertEquals(date('30'), $days);
     }
@@ -92,6 +92,6 @@ class MonthConversionTest extends \Orchestra\Testbench\TestCase
     {
         $m = Time\Month::create('2010-01-31');
 
-        $this->assertEquals($m->nextMonth()->nextMonth()->nextMonth(), "April");
+        $this->assertEquals($m->next()->next()->next(), "April");
     }
 }
