@@ -14,28 +14,21 @@ use Endeavors\Support\VO\Scalar;
  */
 class Month extends ValueValidator
 {
+    private $dateTime;
+
     final protected function __construct($value)
     {
         $this->validate($value);
 
-        $this->value = $value;
+        $this->dateTime = $value;
     }
 
     protected function validate($value)
     {
+        // we expect a string if we are not a datetime
         if( ! ($value instanceof \DateTimeInterface) ) {
             ModernString::create($value);
         }
-    }
-
-    public static function now()
-    {
-        return new static(\DateTime::now());
-    }
-
-    public static function fromNow()
-    {
-        return static::now();
     }
 
     public static function create($value)
@@ -49,39 +42,23 @@ class Month extends ValueValidator
 
     public static function fromDate($date)
     {
-        $value = $date;
-        // if instance of datetimeinterface
-        if( ! ($date instanceof \DateTimeInterface) ) {
-            $value = new \DateTime($date);
-        }
-
-        return new static($value);
+        return static::create($date);
     }
 
     public function next()
     {
-        $dt = $currentDate = $this->value;
+        $day = $this->dateTime->format('j');
+        $this->dateTime->modify('first day of +1 month');
+        $this->dateTime->modify('+' . (min($day, $this->dateTime->format('t')) - 1) . ' days');
+        return new static($this->dateTime);
+    }
 
-        $day = $dt->format('j');
-        $dt->modify('first day of +1 month');
-
-        $dt->modify('+' . (min($day, $dt->format('t')) - 1) . ' days');
-
-        return new static($dt);
-
-        $nextMonthNumericValue = $this->currentNumericalMonth() + 1;
-        // todo account for leap year
-        if( $nextMonthNumericValue == 2 && $this->currentNumericalDay() > $this->nextMonthToDays() ) {
-            return new static(new \DateTime(date($this->currenctNumericalYear() . '-' . 02 . '-' . 28)));
-        } elseif( $nextMonthNumericValue == 2 ) {
-            return new static(new \DateTime(date($this->currenctNumericalYear() . '-' . 02 . '-' . $this->currentNumericalDay())));
-        } elseif( $nextMonthNumericValue == 6 && $this->currentNumericalDay() > $this->nextMonthToDays() ) {
-            return new static(new \DateTime(date($this->currenctNumericalYear() . '-' . 06 . '-' . 30)));
-        } elseif( $nextMonthNumericValue == 6 ) {
-            return new static(new \DateTime(date($this->currenctNumericalYear() . '-' . 06 . '-' . $this->currentNumericalDay())));
-        }
-
-        return new static($currentDate->modify('+1 month'));
+    public function previous()
+    {
+        $day = $this->dateTime->format('j');
+        $this->dateTime->modify('first day of -1 month');
+        $this->dateTime->modify('+' . (min($day, $this->dateTime->format('t')) - 1) . ' days');
+        return new static($this->dateTime);
     }
 
     public function toDays()
@@ -96,7 +73,7 @@ class Month extends ValueValidator
 
     public function toDateTime()
     {
-        return $this->value;
+        return $this->dateTime;
     }
 
     public function get()
@@ -109,23 +86,18 @@ class Month extends ValueValidator
         return strval($this->get());
     }
 
-    public function nextMonthToDays()
-    {
-        return cal_days_in_month(CAL_GREGORIAN, $this->currentNumericalMonth()+1, $this->currenctNumericalYear());
-    }
-
     protected function currenctNumericalYear()
     {
-        return (int)$this->value->format('Y');
+        return (int)$this->dateTime->format('Y');
     }
 
     protected function currentNumericalMonth()
     {
-        return (int)$this->value->format('m');
+        return (int)$this->dateTime->format('m');
     }
 
     protected function currentNumericalDay()
     {
-        return (int)$this->value->format('d');
+        return (int)$this->dateTime->format('d');
     }
 }

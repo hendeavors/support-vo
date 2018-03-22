@@ -37,56 +37,97 @@ class MonthConversionTest extends \Orchestra\Testbench\TestCase
     public function testNextMonthFromFixedDate()
     {
         // create our first date
-        //
-        $m = Time\Month::create('2010-01-31');
 
-        $next = $m->next();
+        $m = Time\Month::create('2010-01-31')->next();
 
-        $this->assertEquals($next, "February");
+        $this->assertEquals($m, "February");
 
-        $days = Scalar\IntegerImplementation::create($next->toDays());
+        $days = Scalar\IntegerImplementation::create($m->toDays());
 
         $this->assertEquals(date('28'), $days);
 
         // create a new date
 
-        $m = Time\Month::create('2010-01-05');
+        $m = Time\Month::create('2010-01-05')->next();
 
-        $next = $m->next();
+        $this->assertEquals($m, "February");
 
-        $this->assertEquals($next, "February");
+        $days = Scalar\IntegerImplementation::create($m->toDays());
 
-        $days = Scalar\IntegerImplementation::create($next->toDays());
-
-        $this->assertEquals($next->toDateTime(), new \DateTime("2010-02-05"));
+        $this->assertEquals($m->toDateTime(), new \DateTime("2010-02-05"));
 
         $this->assertEquals(date('28'), $days);
 
         // create a new date
 
-        $m = Time\Month::create('2010-05-15');
+        $m = Time\Month::create('2010-05-15')->next();
 
-        $next = $m->next();
+        $this->assertEquals($m, "June");
 
-        $this->assertEquals($next, "June");
+        $days = Scalar\IntegerImplementation::create($m->toDays());
 
-        $days = Scalar\IntegerImplementation::create($next->toDays());
-
-        $this->assertEquals($next->toDateTime(), new \DateTime("2010-06-15"));
+        $this->assertEquals($m->toDateTime(), new \DateTime("2010-06-15"));
 
         $this->assertEquals(date('30'), $days);
 
         // create a new date
 
-        $m = Time\Month::create('2010-05-31');
+        $m = Time\Month::create('2010-05-31')->next();
 
-        $next = $m->next();
+        $this->assertEquals($m, "June");
 
-        $this->assertEquals($next, "June");
+        $days = Scalar\IntegerImplementation::create($m->toDays());
 
-        $days = Scalar\IntegerImplementation::create($next->toDays());
+        $this->assertEquals($m->toDateTime(), new \DateTime("2010-06-30"));
 
-        $this->assertEquals($next->toDateTime(), new \DateTime("2010-06-30"));
+        $this->assertEquals(date('30'), $days);
+    }
+
+    public function testPreviousMonthFromFixedDate()
+    {
+        // create our first date
+
+        $m = Time\Month::create('2010-02-28')->previous();
+
+        $this->assertEquals($m, "January");
+
+        $days = Scalar\IntegerImplementation::create($m->toDays());
+
+        $this->assertEquals(date('31'), $days);
+
+        // create a new date
+
+        $m = Time\Month::create('2010-01-05')->previous();
+
+        $this->assertEquals($m, "December");
+
+        $days = Scalar\IntegerImplementation::create($m->toDays());
+
+        $this->assertEquals($m->toDateTime(), new \DateTime("2009-12-05"));
+
+        $this->assertEquals(date('31'), $days);
+
+        // create a new date
+
+        $m = Time\Month::create('2010-05-15')->previous();
+
+        $this->assertEquals($m, "April");
+
+        $days = Scalar\IntegerImplementation::create($m->toDays());
+
+        $this->assertEquals($m->toDateTime(), new \DateTime("2010-04-15"));
+
+        $this->assertEquals(date('30'), $days);
+
+        // create a new date
+
+        $m = Time\Month::create('2010-05-31')->previous();
+
+        $this->assertEquals($m, "April");
+
+        $days = Scalar\IntegerImplementation::create($m->toDays());
+
+        $this->assertEquals($m->toDateTime(), new \DateTime("2010-04-30"));
 
         $this->assertEquals(date('30'), $days);
     }
@@ -111,8 +152,46 @@ class MonthConversionTest extends \Orchestra\Testbench\TestCase
 
         $m->next();
 
-        $final = $m->next();
+        $m->next();
 
-        $this->assertEquals($final, "April");
+        $this->assertEquals($m, "April");
+    }
+
+    public function testChainedRepeatedCallToPreviousMonth()
+    {
+        $m = Time\Month::create('2010-07-31');
+
+        $this->assertEquals($m->previous()->previous()->previous(), "April");
+
+        $m = Time\Month::create('2010-07-04');
+
+        $this->assertEquals($m->previous()->previous()->previous(), "April");
+
+        $this->assertEquals($m->toDateTime(), new \DateTime("2010-04-04"));
+    }
+
+    public function testSeparatedRepeatedCallToPreviousMonth()
+    {
+        $m = Time\Month::create('2010-07-31');
+
+        $m->previous();
+
+        $m->previous();
+
+        $m->previous();
+
+        $this->assertEquals($m, "April");
+
+        $m = Time\Month::create('2010-07-04');
+
+        $m->previous();
+
+        $m->previous();
+
+        $m->previous();
+
+        $this->assertEquals($m, "April");
+
+        $this->assertEquals($m->toDateTime(), new \DateTime("2010-04-04"));
     }
 }
