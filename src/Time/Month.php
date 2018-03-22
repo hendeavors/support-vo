@@ -60,7 +60,14 @@ class Month extends ValueValidator
 
     public function next()
     {
-        $currentDate = $this->value;
+        $dt = $currentDate = $this->value;
+
+        $day = $dt->format('j');
+        $dt->modify('first day of +1 month');
+
+        $dt->modify('+' . (min($day, $dt->format('t')) - 1) . ' days');
+
+        return new static($dt);
 
         $nextMonthNumericValue = $this->currentNumericalMonth() + 1;
         // todo account for leap year
