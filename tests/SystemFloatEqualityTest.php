@@ -16,6 +16,10 @@ class SystemFloatEqualityTest extends \Orchestra\Testbench\TestCase
         $fl = Floats\SystemFloat::create(4.99);
 
         $this->assertTrue($fl->equals(4.99));
+
+        $fl = Floats\SystemFloat::create(0);
+
+        $this->assertTrue($fl->equals(0));
     }
 
     public function testSystemFloatInequality()
