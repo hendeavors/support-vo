@@ -45,20 +45,23 @@ class Month extends ValueValidator
         return static::create($date);
     }
 
+    /**
+     * Increment the current month value by 1
+     * Use a plus for clarity
+     * @return Endeavors\Support\VO\Time\Month
+     */
     public function next()
     {
-        $day = $this->dateTime->format('j');
-        $this->dateTime->modify('first day of +1 month');
-        $this->dateTime->modify('+' . (min($day, $this->dateTime->format('t')) - 1) . ' days');
-        return new static($this->dateTime);
+        return $this->incrementBy(+1);
     }
 
+    /**
+     * Decrement the current month value by 1
+     * @return Endeavors\Support\VO\Time\Month
+     */
     public function previous()
     {
-        $day = $this->dateTime->format('j');
-        $this->dateTime->modify('first day of -1 month');
-        $this->dateTime->modify('+' . (min($day, $this->dateTime->format('t')) - 1) . ' days');
-        return new static($this->dateTime);
+        return $this->incrementBy(-1);
     }
 
     public function toDays()
@@ -84,6 +87,16 @@ class Month extends ValueValidator
     public function __toString()
     {
         return strval($this->get());
+    }
+
+    protected function incrementBy($value)
+    {
+        $modifier = Scalar\IntegerImplementation::create($value);
+
+        $day = $this->dateTime->format('j');
+        $this->dateTime->modify('first day of ' . $modifier->toNative() . ' month');
+        $this->dateTime->modify('+' . (min($day, $this->dateTime->format('t')) - 1) . ' days');
+        return new static($this->dateTime);
     }
 
     protected function currenctNumericalYear()

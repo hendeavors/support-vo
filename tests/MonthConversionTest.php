@@ -12,17 +12,6 @@ class MonthConversionTest extends \Orchestra\Testbench\TestCase
         parent::setUp();
     }
 
-    public function testMonthToDaysFromTodaysDate()
-    {
-        $m = Time\Month::create('Y-03-d');
-
-        $this->assertEquals($m, date("F"));
-
-        $days = Scalar\IntegerImplementation::create($m->toDays());
-
-        $this->assertEquals("31", $days);
-    }
-
     public function testMonthToDaysFromFixedDate()
     {
         $m = Time\Month::create('2010-01-31');
