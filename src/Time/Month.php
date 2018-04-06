@@ -45,6 +45,11 @@ class Month extends ValueValidator
         return static::create($date);
     }
 
+    public static function now()
+    {
+        return static::fromDate('Y-m-d H:i:s');
+    }
+
     /**
      * Increment the current month value by 1
      * Use a plus for clarity

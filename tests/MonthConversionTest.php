@@ -183,4 +183,9 @@ class MonthConversionTest extends \Orchestra\Testbench\TestCase
 
         $this->assertEquals($m->toDateTime(), new \DateTime("2010-04-04"));
     }
+
+    public function testNowIsThisMonth()
+    {
+        $this->assertEquals(Time\Month::now(), date('F'));
+    }
 }
