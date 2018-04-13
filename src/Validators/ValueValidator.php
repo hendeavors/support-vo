@@ -24,9 +24,9 @@ abstract class ValueValidator
      *
      * @return this
      */
-    public static function create($string)
+    public static function create($value)
     {
-        return new static($string);
+        return new static($value);
     }
 
     public function get()

@@ -9,7 +9,7 @@ use Endeavors\Support\VO\Validators\ValueValidator;
  * Represents a string
  * Perform operations on a string value object
  */
-class ModernString extends Scalar\String
+class ModernString extends Scalar\SystemString
 {
     /**
      * @param string
@@ -21,9 +21,11 @@ class ModernString extends Scalar\String
             $value = $value->get();
         }
 
-        parent::__construct($value);
+        $this->validate($value);
+
+        $this->value = $value;
     }
-    
+
     /**
      * explode the string
      *
@@ -74,11 +76,6 @@ class ModernString extends Scalar\String
         return $this->length() > 0;
     }
 
-    public function toUpper()
-    {
-        return static::create(strtoupper($this->get()));
-    }
-
     public function toLower()
     {
         return static::create(strtolower($this->get()));
@@ -97,6 +94,4 @@ class ModernString extends Scalar\String
             return $that->$arg();
         }
     }
-
-
 }

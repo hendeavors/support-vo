@@ -77,6 +77,30 @@ class ModernArray
     }
 
     /**
+     * Search for a value in the array
+     * @param  [type] $value [description]
+     * @return [type]        [description]
+     */
+    public function search($value)
+    {
+        return array_search($value, $this->get());
+    }
+
+    /**
+     * Get a value from a key
+     * @param  [type] $key [description]
+     * @return [type]      [description]
+     */
+    public function value($key)
+    {
+        if(true == $this->hasKey($key)) {
+            return $this->get()[$key];
+        }
+
+        return null;
+    }
+
+    /**
      * @todo test
      */
     public function combine($input)

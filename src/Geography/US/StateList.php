@@ -4,9 +4,12 @@ namespace Endeavors\Support\VO\Geography\US;
 
 use Endeavors\Support\VO\ModernArray;
 
+/**
+ * @todo Create an enumeration of states
+ */
 trait StateList
 {
-    protected function all()
+    protected static function states()
     {
         return ModernArray::create(array(
         	'AL'=>'ALABAMA',
@@ -72,5 +75,10 @@ trait StateList
         	'AA'=>'ARMED FORCES AMERICA (EXCEPT CANADA)',
         	'AP'=>'ARMED FORCES PACIFIC'
         ));
+    }
+
+    protected function all()
+    {
+        return static::states();
     }
 }

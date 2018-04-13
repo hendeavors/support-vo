@@ -14,9 +14,9 @@ class StateNameCreationTest extends \Orchestra\Testbench\TestCase
     /**
      * @expectedException Endeavors\Support\VO\Geography\US\Exception\InvalidStateName
      */
-    public function testCreatingInvalidStateCode()
+    public function testCreatingInvalidStateName()
     {
-        $modernString = StateName::create("abcd");
+        StateName::create("abcd");
     }
 
     /**
@@ -24,11 +24,20 @@ class StateNameCreationTest extends \Orchestra\Testbench\TestCase
      */
     public function testCreatingStateNameWithBadDataType()
     {
-        $modernString = StateName::create([]);
+        StateName::create([]);
     }
 
-    public function testCreatingValidStateCode()
+    public function testCreatingValidStateName()
     {
-        $modernString = StateName::create("Montana");
+        StateName::create("Montana");
+    }
+
+    public function testCreatingStateNameFromStateCode()
+    {
+        $name = StateName::fromCode("AZ");
+
+        $this->assertEquals($name, "ARIZONA");
+
+        $this->assertEquals($name->get(), "ARIZONA");
     }
 }
