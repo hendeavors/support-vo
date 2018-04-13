@@ -8,11 +8,25 @@ use Endeavors\Support\VO\ModernString;
 use Endeavors\Support\VO\Scalar;
 
 /**
- * Represent a time length, specifically a second
+ * Represent a length of time with integer precision, specifically a second
  *
  */
 class Second extends Scalar\Integer\Long
 {
+    /**
+     * Give me a unit of seconds from hours
+     * @param  [type] $days [description]
+     * @return [type]       [description]
+     */
+    public static function fromHours($hours)
+    {
+        $hours = Scalar\IntegerImplementation::create($hours);
+
+        $hours = $hours->toNative() * 60 * 60;
+
+        return new static($hours);
+    }
+
     public static function fromDays($days)
     {
         $days = Scalar\IntegerImplementation::create($days);
