@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # PHP Value Objects [![Build Status](https://travis-ci.org/hendeavors/support-vo.svg?branch=2.2)](https://travis-ci.org/hendeavors/support-vo)
+=======
+# PHP Value Objects [![Build Status](https://travis-ci.org/hendeavors/support-vo.svg?branch=develop)](https://travis-ci.org/hendeavors/support-vo)
+>>>>>>> develop
 
 A library designed to take an object oriented approach when working with primitive types in php.
 

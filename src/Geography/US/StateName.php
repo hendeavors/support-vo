@@ -5,9 +5,18 @@ namespace Endeavors\Support\VO\Geography\US;
 use Endeavors\Support\VO\Scalar;
 use Endeavors\Support\VO\ModernString;
 
-class StateName extends Scalar\BaseString
+class StateName extends Scalar\SystemString
 {
     use StateList;
+
+    public static function fromCode($code)
+    {
+        $key = StateCode::create($code);
+
+        $name = static::states()->value($key->toNativeUpper());
+        // if the state code exists we'll create a statecode value object
+        return new static($name);
+    }
 
     final protected function __construct($value)
     {

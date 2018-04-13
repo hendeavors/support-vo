@@ -13,19 +13,20 @@
             <directory>./tests/</directory>
         </testsuite>
 
-        
+
     </testsuites>
     <filter>
-        
+
         <whitelist>
 
             <directory suffix=".php">src/</directory>
-            
+
         </whitelist>
 
     </filter>
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="CACHE_DRIVER" value="redis"/>
+        <env name="APP_KEY" value="500QvPyB1vOnsAKghAxIUVkfYgxa4tsy"/>
     </php>
 </phpunit>
