@@ -66,12 +66,12 @@ class Month extends ValueValidator
      */
     public function previous()
     {
-        return $this->incrementBy(-1);
+        return $this->decrementBy(1);
     }
 
     public function toDays()
     {
-        return cal_days_in_month(CAL_GREGORIAN, $this->currentNumericalMonth(), $this->currenctNumericalYear());
+        return Day::fromCalendarMonth($this->currentNumericalMonth(), $this->currenctNumericalYear())->get();
     }
 
     public function toSeconds()
@@ -84,6 +84,16 @@ class Month extends ValueValidator
         return $this->dateTime;
     }
 
+    /**
+     * Maybe somewhat opinionated on
+     * A "native" representation of a month
+     * @return [type] [description]
+     */
+    public function toNative()
+    {
+        return $this->toSeconds();
+    }
+
     public function get()
     {
         return $this->toDateTime()->format('F');
@@ -92,6 +102,11 @@ class Month extends ValueValidator
     public function __toString()
     {
         return strval($this->get());
+    }
+
+    protected function decrementBy($value)
+    {
+        return $this->incrementBy(-$value);
     }
 
     protected function incrementBy($value)

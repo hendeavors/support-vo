@@ -8,7 +8,7 @@ use Endeavors\Support\VO\ModernString;
 use Endeavors\Support\VO\Scalar;
 
 /**
- * Represent a number
+ * Represent a time length, specifically a second
  *
  */
 class Second extends Scalar\Integer\Long
@@ -20,6 +20,11 @@ class Second extends Scalar\Integer\Long
         $seconds = $days->toNative() * 24 * 60 * 60;
 
         return new static($seconds);
+    }
+
+    public function toDays()
+    {
+        return Day::fromSeconds($this->get())->get();
     }
 
     public function get()
