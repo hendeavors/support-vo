@@ -7,8 +7,9 @@ use Endeavors\Support\VO\Contracts;
 
 /**
  * For now we'll define dollar implementations
+ * @todo represent money alternate currencies in some other object
  */
-final class Money extends Scalar\Floats\SystemFloat
+final class Money
 {
     /**
      * Representation for the money, a currency symbol
@@ -30,9 +31,7 @@ final class Money extends Scalar\Floats\SystemFloat
      */
     final protected function __construct($value, $representation, $precision)
     {
-        $this->validate($value);
-
-        $this->representation = $representation->toSymbol();
+        $this->representation = $representation;
 
         $this->precision = $precision;
 
@@ -53,16 +52,43 @@ final class Money extends Scalar\Floats\SystemFloat
     {
         $precision = Scalar\IntegerImplementation::create($precision);
 
+        $value = Scalar\Floats\SystemFloat::create($value);
+
         return new static($value, $translator, $precision);
+    }
+
+    public function toNative()
+    {
+        return $this->get();
     }
 
     public function get()
     {
-        return round($this->value, $this->precision->toNative());
+        return round($this->value->toNative(), $this->precision->toNative());
     }
 
     public function __toString()
     {
-        return \strval($this->representation . $this->get());
+        return \strval($this->representation->toSymbol() . $this->get());
+    }
+
+    /**
+     * Check object equality
+     * @param  [type] $value [description]
+     * @return [type] bool
+     */
+    public function equals($value)
+    {
+        return $this->value->equals($value);
+    }
+
+    /**
+     * Check identity of the actual value
+     * @param  [type] $value [description]
+     * @return [type]        [description]
+     */
+    public function identical($value)
+    {
+        return $this->value->identical($value);
     }
 }
