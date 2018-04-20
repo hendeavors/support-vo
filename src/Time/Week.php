@@ -52,6 +52,15 @@ class Week extends Scalar\Integer\Long
         return Second::fromWeeks($this->get())->get();
     }
 
+    /**
+     * Represent me in days
+     * @return [type] [description]
+     */
+    public function toDays()
+    {
+        return $this->get() * 7;
+    }
+
     public function get()
     {
         return $this->value;
