@@ -34,6 +34,13 @@ class YearConversionTest extends \Orchestra\Testbench\TestCase
         $this->assertEquals($y->get(), 1);
     }
 
+    public function testConversionFromHourValueToWeeks()
+    {
+        $y = Time\Year::fromHours(Time\Year::guessUnit() * 24);
+
+        $this->assertEquals($y->toWeeks(), 52);
+    }
+
     public function testConversionFromHourValueToDays()
     {
         $y = Time\Year::fromHours(Time\Year::guessUnit() * 24);

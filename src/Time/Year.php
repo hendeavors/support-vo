@@ -15,6 +15,7 @@ class Year extends Scalar\Integer\Long
 {
     const LEAP = 366;
     const NOLEAP = 365;
+    
     /**
      * Give me a unit of years from seconds
      * @param  [type] $seconds [description]
@@ -139,7 +140,9 @@ class Year extends Scalar\Integer\Long
      */
     public function toDays()
     {
-        return (int)($this->toWeeks() * 7);
+        $weeks = $this->toWeeks() + $this->getWeekRemainder();
+
+        return (int)ceil($weeks * 7);
     }
 
     /**
@@ -148,7 +151,7 @@ class Year extends Scalar\Integer\Long
      */
     public function toWeeks()
     {
-        return ($this->value * static::guessUnit()) / 7;
+        return (int)(($this->value * static::guessUnit()) / 7);
     }
 
     public function get()
@@ -159,5 +162,14 @@ class Year extends Scalar\Integer\Long
     public function __toString()
     {
         return strval($this->get());
+    }
+
+    protected function getWeekRemainder()
+    {
+        if ($this->get() === 0) {
+            return 0;
+        }
+
+        return .1428571428571;
     }
 }
