@@ -2,6 +2,12 @@
 
 A library designed to take an object oriented approach when working with primitive types in php.
 
+# Installation
+
+```
+composer require endeavors/support-vo
+```
+
 # Usage
 
 Using this package is fairly straightforward. Simply create the value object and you are ready to go. Most of the value objects offer a factory creation:
