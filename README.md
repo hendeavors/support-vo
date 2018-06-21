@@ -12,7 +12,9 @@ SomeClass::create('somevalue');
 
 ```
 
-The value used when creating the value object will be validated. An Email Address:
+## The value given to the value object is validated.
+
+An email address value object:
 
 ```php
 use Endeavors\Support\VO\EmailAddress;
@@ -25,7 +27,7 @@ EmailAddress::create('somevalue');
 
 ```
 
-A day value object will also be validated:
+A day value object:
 
 ```php
 use Endeavors\Support\VO\Time\Day;
