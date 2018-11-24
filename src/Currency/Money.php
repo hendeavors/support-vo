@@ -54,6 +54,11 @@ final class Money
 
         $value = Scalar\Floats\SystemFloat::create($value);
 
+        return static::create($value, $translator, $precision);
+    }
+
+    public static function create(Scalar\Floats\SystemFloat $value, Contracts\ITranslator $translator, Scalar\IntegerImplementation $precision)
+    {
         return new static($value, $translator, $precision);
     }
 
