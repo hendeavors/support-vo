@@ -2,4 +2,4 @@
 
 namespace Endeavors\Support\VO\Exceptions;
 
-class InvalidLong extends \RuntimeException{}
+class InvalidLong extends \RuntimeException {}
