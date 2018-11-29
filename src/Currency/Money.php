@@ -12,21 +12,28 @@ use Endeavors\Support\VO\Contracts;
 final class Money
 {
     /**
+     * The value to represent for this value object
+     * @var Scalar\Floats\SystemFloat
+     */
+    private $value;
+
+    /**
      * Representation for the money, a currency symbol
-     * @var [type]
+     * @var Contracts\ITranslator
      * @todo what are valid currency units?
      */
-    protected $representation;
+    private $representation;
 
     /**
      * The precision
-     * @var [type]
+     * @var Scalar\IntegerImplementation
      */
-    protected $precision;
+    private $precision;
+
     /**
      * Money
-     * @param [type] $value          [description]
-     * @param [type] $currencySymbol [description]
+     * @param Scalar\Floats\SystemFloat $value          [description]
+     * @param Contracts\ITranslator $currencySymbol [description]
      * @todo define currencySymbol
      */
     final protected function __construct($value, $representation, $precision)
