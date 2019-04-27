@@ -31,7 +31,6 @@
         }
     },
     "require": {
-        "php": ">=5.6 <7.2",
         "marc-mabe/php-enum": "^2.3"
     }
 }
