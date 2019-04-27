@@ -26,7 +26,7 @@ final class Money
 
     /**
      * The precision
-     * @var Scalar\IntegerImplementation
+     * @var Scalar\Integer\Integer
      */
     private $precision;
 
@@ -64,7 +64,7 @@ final class Money
         return static::create($value, $translator, $precision);
     }
 
-    public static function create(Scalar\Floats\SystemFloat $value, Contracts\ITranslator $translator, Scalar\IntegerImplementation $precision)
+    public static function create(Scalar\Floats\SystemFloat $value, Contracts\ITranslator $translator, Scalar\Integer\Integer $precision)
     {
         return new static($value, $translator, $precision);
     }
@@ -86,21 +86,21 @@ final class Money
 
     /**
      * Check object equality
-     * @param  [type] $value [description]
-     * @return [type] bool
+     * @param  mixed $other The value to check
+     * @return bool
      */
-    public function equals($value)
+    public function equals($other)
     {
-        return $this->value->equals($value);
+        return $this->value->equals($other);
     }
 
     /**
-     * Check identity of the actual value
-     * @param  [type] $value [description]
-     * @return [type]        [description]
+     * Check object identity
+     * @param  mixed $other The value to check
+     * @return bool
      */
-    public function identical($value)
+    public function identical($other)
     {
-        return $this->value->identical($value);
+        return $this->value->identical($other);
     }
 }
