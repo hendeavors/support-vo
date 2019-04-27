@@ -1,4 +1,4 @@
-# PHP Value Objects [![Build Status](https://travis-ci.org/hendeavors/support-vo.svg?branch=2.3)](https://travis-ci.org/hendeavors/support-vo)
+# PHP Value Objects [![Build Status](https://travis-ci.org/hendeavors/support-vo.svg?branch=2.3)](https://travis-ci.org/hendeavors/support-vo) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/hendeavors/support-vo/badges/quality-score.png?b=2.3)](https://scrutinizer-ci.com/g/hendeavors/support-vo/?branch=2.3)
 
 A library designed to take an object oriented approach when working with primitive types in php.
 
