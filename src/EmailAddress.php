@@ -18,8 +18,8 @@ class EmailAddress extends Scalar\SystemString
      * Create the email
      * We default to a syntactically valid email
      *
-     * @param string email
-     * @param bool loose
+     * @param string $email
+     * @param bool $loose
      */
     protected function __construct($email, $loose = true)
     {

@@ -6,6 +6,11 @@ use Endeavors\Support\VO\Contracts;
 
 class Translator implements Contracts\ITranslator
 {
+    /**
+     * @var \MabeEnum\Enum $translation
+     */
+    private $translation;
+
     private function __construct($translation)
     {
         $this->translation = $translation;
