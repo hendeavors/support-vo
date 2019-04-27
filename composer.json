@@ -23,9 +23,9 @@
     },
     "require-dev": {
         "orchestra/testbench": "3.2.*",
-        "phpunit/phpunit": "~4.8|~5.0",
+        "phpunit/phpunit": "5.3.*",
         "doctrine/inflector": "1.2.*",
-        "doctrine/instantiator": "1.0.5" 
+        "doctrine/instantiator": "1.0.5"
     },
     "extra": {
         "branch-alias": {
