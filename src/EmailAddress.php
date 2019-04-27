@@ -10,7 +10,7 @@ class EmailAddress extends Scalar\SystemString
     /**
      * Determine if we should use strict validation
      *
-     * @var bool
+     * @var bool $loose
      */
     protected $loose;
 
