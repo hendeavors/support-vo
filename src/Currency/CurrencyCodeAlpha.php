@@ -5,8 +5,8 @@ namespace Endeavors\Support\VO\Currency;
 use MabeEnum\Enum;
 
 /**
- * @method \MabeEnum\Enum USD()
- * @static \MabeEnum\Enum GBP()
+ * @method static \MabeEnum\Enum USD()
+ * @method static \MabeEnum\Enum GBP()
  */
 final class CurrencyCodeAlpha extends Enum
 {
