@@ -6,7 +6,7 @@ use MabeEnum\Enum;
 
 /**
  * @method \MabeEnum\Enum USD()
- * @method \MabeEnum\Enum GBP()
+ * @static \MabeEnum\Enum GBP()
  */
 final class CurrencyCodeAlpha extends Enum
 {
