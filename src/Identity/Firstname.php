@@ -9,6 +9,6 @@ class Firstname extends SystemString
 {
     protected function __construct(string $firstname)
     {
-        $this->value = ModernString::create($firstname;
+        $this->value = ModernString::create($firstname);
     }
 }
