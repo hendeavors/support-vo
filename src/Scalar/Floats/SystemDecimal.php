@@ -1,4 +1,3 @@
-
 <?php
 
 namespace Endeavors\Support\VO\Scalar\Floats;
