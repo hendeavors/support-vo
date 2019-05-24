@@ -25,7 +25,7 @@ class SystemFloat extends Scalar\Number
         }
 
         // integer validation failed and we do not have a float
-        if( ! is_float($value) && $valid === false ) {
+        if (!is_float($value) && $valid === false ) {
             throw new Exceptions\InvalidFloat(sprintf("The value, %s, is not a valid float", $value));
         }
 
@@ -39,24 +39,24 @@ class SystemFloat extends Scalar\Number
 
     /**
      * Check object equality
-     * @param  [type] $value [description]
-     * @return [type] bool
+     * @param  mixed $other The value to check
+     * @return bool
      */
-    public function equals($value)
+    public function equals($other)
     {
-        $comparison = static::create($value);
+        $comparison = static::create($other);
 
         return $this == $comparison;
     }
 
     /**
      * Check identity of the actual value
-     * @param  [type] $value [description]
-     * @return [type]        [description]
+     * @param  mixed $other The value to identity check
+     * @return bool
      */
-    public function identical($value)
+    public function identical($other)
     {
-        $comparison = static::create($value);
+        $comparison = static::create($other);
 
         return $this->toNative() === $comparison->toNative();
     }

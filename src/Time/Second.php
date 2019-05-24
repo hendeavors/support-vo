@@ -41,11 +41,30 @@ class Second extends Scalar\Integer\Long
         return new static($value);
     }
 
+    /**
+     * Give me a unit of seconds from weeks
+     * @param  [type] $value [description]
+     * @return [type]        [description]
+     */
     public static function fromWeeks($value)
     {
         $value = static::fromDays($value);
 
         $value = $value->get() * 7;
+
+        return new static($value);
+    }
+
+    /**
+     * Give me a unit of seconds from years
+     * @param  [type] $value [description]
+     * @return [type]        [description]
+     */
+    public static function fromYears($value)
+    {
+        $value = Scalar\IntegerImplementation::create($value);
+
+        $value = $value->toNative() * 60 * 60 * 24 * Year::guessUnit();
 
         return new static($value);
     }

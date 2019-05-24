@@ -42,4 +42,14 @@ class SystemFloatEqualityTest extends \Orchestra\Testbench\TestCase
 
         $this->assertFalse($fl->identical(4.79));
     }
+
+    /**
+     * @expectedException \Endeavors\Support\VO\Exceptions\InvalidNumber
+     */
+    public function testSystemFloatNullEquality()
+    {
+        $fl = Floats\SystemFloat::create(4.2);
+
+        $this->assertFalse($fl->equals(null));
+    }
 }

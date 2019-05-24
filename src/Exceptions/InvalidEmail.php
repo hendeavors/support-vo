@@ -2,4 +2,4 @@
 
 namespace Endeavors\Support\VO\Exceptions;
 
-class InvalidEmail extends \RuntimeException{}
+class InvalidEmail extends \RuntimeException {}

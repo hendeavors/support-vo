@@ -6,6 +6,11 @@ use Endeavors\Support\VO\Contracts;
 
 class Translator implements Contracts\ITranslator
 {
+    /**
+     * @var \MabeEnum\Enum $translation
+     */
+    private $translation;
+
     private function __construct($translation)
     {
         $this->translation = $translation;
@@ -26,7 +31,9 @@ class Translator implements Contracts\ITranslator
     public function toCode()
     {
         //
-        if( $this->translation instanceof CurrencyCodeAlpha ) return $this->translation;
+        if ($this->translation instanceof CurrencyCodeAlpha) {
+            return $this->translation;
+        }
 
         $key = key($this->translation->getValue());
 
@@ -36,7 +43,9 @@ class Translator implements Contracts\ITranslator
     public function toSymbol()
     {
         //
-        if( $this->translation instanceof CurrencySymbol ) return $this->translation;
+        if ($this->translation instanceof CurrencySymbol) {
+            return $this->translation;
+        }
 
         $key = key($this->translation->getValue());
 

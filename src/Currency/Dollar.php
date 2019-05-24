@@ -6,8 +6,7 @@ use Endeavors\Support\VO\Scalar;
 use Endeavors\Support\VO\Contracts;
 
 /**
- * For now we'll define dollar implementations
- * @todo represent money alternate currencies in some other object
+ * Represents a dollar
  */
 final class Dollar
 {

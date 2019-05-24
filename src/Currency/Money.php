@@ -12,21 +12,28 @@ use Endeavors\Support\VO\Contracts;
 final class Money
 {
     /**
+     * The value to represent for this value object
+     * @var Scalar\Floats\SystemFloat
+     */
+    private $value;
+
+    /**
      * Representation for the money, a currency symbol
-     * @var [type]
+     * @var Contracts\ITranslator
      * @todo what are valid currency units?
      */
-    protected $representation;
+    private $representation;
 
     /**
      * The precision
-     * @var [type]
+     * @var Scalar\Integer\Integer
      */
-    protected $precision;
+    private $precision;
+
     /**
-     * Dollar
-     * @param [type] $value          [description]
-     * @param [type] $currencySymbol [description]
+     * Money
+     * @param Scalar\Floats\SystemFloat $value          [description]
+     * @param Contracts\ITranslator $currencySymbol [description]
      * @todo define currencySymbol
      */
     private function __construct($value, $representation, $precision)
@@ -54,6 +61,11 @@ final class Money
 
         $value = Scalar\Floats\SystemFloat::create($value);
 
+        return static::create($value, $translator, $precision);
+    }
+
+    public static function create(Scalar\Floats\SystemFloat $value, Contracts\ITranslator $translator, Scalar\Integer\Integer $precision)
+    {
         return new static($value, $translator, $precision);
     }
 
@@ -74,21 +86,21 @@ final class Money
 
     /**
      * Check object equality
-     * @param  float $value
-     * @return bool is equal
+     * @param  mixed $other The value to check
+     * @return bool
      */
-    public function equals($value)
+    public function equals($other)
     {
-        return $this->value->equals($value);
+        return $this->value->equals($other);
     }
 
     /**
-     * Check identity of the actual value
-     * @param  float $value
-     * @return bool is identical
+     * Check object identity
+     * @param  mixed $other The value to check
+     * @return bool
      */
-    public function identical($value)
+    public function identical($other)
     {
-        return $this->value->identical($value);
+        return $this->value->identical($other);
     }
 }
