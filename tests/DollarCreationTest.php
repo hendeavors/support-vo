@@ -82,4 +82,124 @@ class DollarCreationTest extends \Orchestra\Testbench\TestCase
 
         $this->assertInternalType('float', $dollars->toNative());
     }
+
+    /** @test */
+    public function convertToPennies()
+    {
+        $dollars = Money::fromDollars(4);
+
+        $this->assertEquals($dollars->inPennies(), 400);
+    }
+
+    /** @test */
+    public function convertToQuarters()
+    {
+        $dollars = Money::fromDollars(4);
+
+        $this->assertEquals($dollars->inQuarters(), 16);
+
+        $dollars = Money::fromDollars(4.18);
+
+        $this->assertEquals($dollars->inQuarters(), 16);
+
+        $dollars = Money::fromDollars(4.52);
+
+        $this->assertEquals($dollars->inQuarters(), 18);
+
+        $dollars = Money::fromDollars(0.25);
+
+        $this->assertEquals($dollars->inQuarters(), 1);
+
+        $dollars = Money::fromDollars(0.2499999999);
+
+        $this->assertEquals($dollars->inQuarters(), 0);
+    }
+
+    /** @test */
+    public function convertToDimes()
+    {
+        $dollars = Money::fromDollars(4);
+
+        $this->assertEquals($dollars->inDimes(), 40);
+
+        $dollars = Money::fromDollars(0.2499999999);
+
+        $this->assertEquals($dollars->inDimes(), 2);
+    }
+
+    /** @test */
+    public function convertToNickels()
+    {
+        $dollars = Money::fromDollars(4);
+
+        $this->assertEquals($dollars->inNickels(), 80);
+
+        $dollars = Money::fromDollars(4.045);
+
+        $this->assertEquals($dollars->inNickels(), 80);
+
+        $dollars = Money::fromDollars(4.09);
+
+        $this->assertEquals($dollars->inNickels(), 81);
+    }
+
+    /** @test */
+    public function convertToMicrons()
+    {
+        $dollars = Money::fromDollars(4);
+
+        $this->assertEquals($dollars->inMicrons(), 4000000);
+    }
+
+    /** @test */
+    public function addMoney()
+    {
+        $dollars = Money::fromDollars(4);
+
+        $dollars->add(5.52);
+
+        $this->assertEquals(4, $dollars->toNative());
+    }
+
+    /** @test */
+    public function addMoneyImmutable()
+    {
+        $dollars = Money::fromDollars(4);
+
+        $dollars = $dollars->add(5.52);
+
+        $this->assertEquals(9.52, $dollars->toNative());
+
+        $dollars = Money::fromDollars(1.1);
+
+        $dollars = $dollars->add(1.2);
+
+        $this->assertEquals(2.3, $dollars->toNative());
+
+        $dollars = Money::fromDollars(0.1);
+
+        $dollars = $dollars->add(0.2);
+
+        $this->assertEquals(0.3, $dollars->toNative());
+    }
+
+    /** @test */
+    public function subtractMoney()
+    {
+        $dollars = Money::fromDollars(4);
+
+        $dollars->subtract(5.52);
+
+        $this->assertEquals(4, $dollars->toNative());
+    }
+
+    /** @test */
+    public function subtractMoneyImmutable()
+    {
+        $dollars = Money::fromDollars(4);
+
+        $dollars = $dollars->subtract(5.52);
+
+        $this->assertEquals(-1.52, $dollars->toNative());
+    }
 }

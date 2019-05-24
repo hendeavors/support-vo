@@ -24,12 +24,12 @@ final class Money
      */
     protected $precision;
     /**
-     * Money
+     * Dollar
      * @param [type] $value          [description]
      * @param [type] $currencySymbol [description]
      * @todo define currencySymbol
      */
-    final protected function __construct($value, $representation, $precision)
+    private function __construct($value, $representation, $precision)
     {
         $this->representation = $representation;
 
@@ -38,12 +38,12 @@ final class Money
         $this->value = $value;
     }
 
-    public static function fromDollars($value, $precision = 2)
+    public static function fromDollars(float $value, $precision = 2)
     {
-        return static::from($value, Translator::fromCode(CurrencyCodeAlpha::USD()), $precision);
+        return Dollar::create($value, $precision);
     }
 
-    public static function fromPounds($value, $precision = 2)
+    public static function fromPounds(float $value, $precision = 2)
     {
         return static::from($value, Translator::fromCode(CurrencyCodeAlpha::GBP()), $precision);
     }
@@ -74,8 +74,8 @@ final class Money
 
     /**
      * Check object equality
-     * @param  [type] $value [description]
-     * @return [type] bool
+     * @param  float $value
+     * @return bool is equal
      */
     public function equals($value)
     {
@@ -84,8 +84,8 @@ final class Money
 
     /**
      * Check identity of the actual value
-     * @param  [type] $value [description]
-     * @return [type]        [description]
+     * @param  float $value
+     * @return bool is identical
      */
     public function identical($value)
     {
