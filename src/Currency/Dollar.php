@@ -13,16 +13,17 @@ final class Dollar
     use DollarConversion;
 
     private $value;
+
     /**
      * translator for the money, a currency symbol
-     * @var string
+     * @var Contracts\ITranslator
      * @todo what are valid currency units?
      */
     private $translator;
 
     /**
      * The precision
-     * @var int
+     * @var Scalar\Integer\Integer
      */
     private $precision;
 
@@ -67,7 +68,7 @@ final class Dollar
 
     /**
      * Check object equality
-     * @param  float value
+     * @param  float $value
      * @return bool is equal
      */
     public function equals($value)
