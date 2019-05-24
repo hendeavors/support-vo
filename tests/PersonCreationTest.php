@@ -14,7 +14,8 @@ class PersonCreationTest extends TestCase
         parent::setUp();
     }
 
-    public function testCreatingPersonInstance()
+    /** @test **/
+    public function creatingPersonInstance()
     {
         $person = new Person(Firstname::create("bob"), Lastname::create("smith"));
     }

@@ -17,7 +17,7 @@ final class DecimalPrecision
 
     public static function from($leftPrecision, $rightPrecision)
     {
-
+        return new static($leftPrecision, $rightPrecision);
     }
 
     public static function create(LeftPrecision $leftPrecision, RightPrecision $rightPrecision)

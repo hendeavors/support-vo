@@ -21,7 +21,7 @@ final class SystemDecimal
 
     public static function from($value, $left, $right)
     {
-        DecimalPrecision::from($left, $right);
+        return static::create($value, DecimalPrecision::from($left, $right));
     }
 
     public static function create($value, DecimalPrecision $precision)
